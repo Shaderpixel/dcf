@@ -1,4 +1,2 @@
-const dcf_picturefill = require('../vendor/picturefill.min.js');
-
-// pull in an entry point
+// pull in a dependency
 const main_js = require('../main.js');

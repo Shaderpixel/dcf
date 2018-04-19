@@ -7,7 +7,7 @@ var extractTextPlugin = require('extract-text-webpack-plugin');
 
 var core_js_config = {
   entry: {
-    head: ['babel-polyfill', 'dialog-polyfill', './core/js/src/entry/core_head_js_entry.js'],
+    head: ['babel-polyfill', 'dialog-polyfill', 'picturefill', './core/js/src/entry/core_head_js_entry.js'],
     body: './core/js/src/entry/core_body_js_entry.js'
   },
   output: {
