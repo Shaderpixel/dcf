@@ -11,7 +11,7 @@ var core_js_config = {
     body: './core/js/src/entry/core_body_js_entry.js'
   },
   output: {
-    path: path.resolve(__dirname, './core/js'),
+    path: path.resolve(__dirname, './core/js/dist'),
     filename: 'core-[name].js'
   },
   watch: true,
@@ -34,7 +34,7 @@ var theme_js_config = function(env) {
       body: './theme/' + theme + '/js/src/entry/theme_body_js_entry.js'
     },
     output: {
-      path: path.resolve(__dirname, './theme/' + theme + '/js'),
+      path: path.resolve(__dirname, './theme/' + theme + '/js/dist'),
       filename: theme + '-[name].js'
     },
     watch        : true,

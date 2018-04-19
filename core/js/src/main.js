@@ -5,5 +5,4 @@ log = function (data) {
 	}
 }
 
-// load jquery
-$ = require('./vendor/jquery.js');
+

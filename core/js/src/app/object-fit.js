@@ -1,5 +1,9 @@
 // Based on https://www.bmorecreativeinc.com/edge-object-fit-fallback-without-polyfill-modernizr/
 
+// load jquery
+$ = require('../vendor/jquery.js');
+
+
 var results = document.querySelector( '.dcf-obj-fit-check' );
 var objectfit = window.getComputedStyle( results, '::before' ).content;
 if( objectfit == 'none' ) {
