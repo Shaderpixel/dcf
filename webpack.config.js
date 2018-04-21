@@ -7,7 +7,8 @@ var extractTextPlugin = require('extract-text-webpack-plugin');
 
 var core_js_config = {
   entry: {
-    head: ['babel-polyfill', 'dialog-polyfill', 'picturefill', './core/js/src/entry/core_head_js_entry.js'],
+    vendor: ['babel-polyfill', 'dialog-polyfill', 'picturefill'],
+    head: './core/js/src/entry/core_head_js_entry.js',
     body: './core/js/src/entry/core_body_js_entry.js'
   },
   output: {
@@ -30,6 +31,9 @@ var theme_js_config = function(env) {
 
   return {
     entry: {
+      // code splitting: we take all of our vendor code and put it in a separate bundle (vendor.min.js)
+      // this way it will have better caching/cache hits since it changes infrequently
+      vendor: path.resolve(__dirname, './core/js/dist', 'core-vendor.js'),
       head: './theme/' + theme + '/js/src/entry/theme_head_js_entry.js',
       body: './theme/' + theme + '/js/src/entry/theme_body_js_entry.js'
     },
