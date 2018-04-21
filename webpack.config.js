@@ -1,6 +1,5 @@
 // webpack.config.js
 const path = require('path');
-const webpack = require('webpack');
 
 var styleLintPlugin = require('stylelint-webpack-plugin');
 var extractTextPlugin = require('extract-text-webpack-plugin');
