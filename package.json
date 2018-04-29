@@ -20,9 +20,10 @@
     "babel-core": "^6.26.0",
     "babel-loader": "^7.1.4",
     "babel-preset-env": "^1.6.1",
-    "css-loader": "^0.28.10",
+    "css-loader": "^0.28.11",
     "csso": "^2.1.1",
-    "extract-text-webpack-plugin": "^3.0.2",
+    "extract-text-webpack-plugin": "^4.0.0-beta.0",
+    "file-loader": "^1.1.11",
     "modularscale-sass": "^3.0.5",
     "node-sass": "^4.7.2",
     "postcss-loader": "^2.1.1",
@@ -34,14 +35,17 @@
     "stylelint-webpack-plugin": "^0.10.3",
     "sync-exec": "^0.6.2",
     "tar-fs": "^1.11.1",
-    "webpack": "^3.8.1"
+    "url-loader": "^1.0.1",
+    "webpack": "^4.6.0",
+    "webpack-bundle-analyzer": "^2.11.1",
+    "webpack-cli": "^2.0.15",
+    "webpack-dev-server": "^3.1.3",
+    "webpack-merge": "^4.1.2"
   },
-  "engines": {
-    "node": "node >= 0.10.0"
-  },
-  "scripts": {
-    "dev": "webpack -d --watch",
-    "prod": "webpack -p"
+  "dependencies": {
+    "babel-polyfill": "^6.26.0",
+    "object-fit-images": "^3.2.3",
+    "picturefill": "^3.0.2"
   },
   "browserslist": [
     "last 1 Chrome version",
@@ -54,8 +58,27 @@
     "iOS >= 10",
     "> 1% in my stats"
   ],
-  "dependencies": {
-    "babel-polyfill": "^6.26.0",
-    "object-fit-images": "^3.2.3"
+  "engines": {
+    "node": "node >= 0.10.0"
+  },
+  "scripts": {
+    "build:dist:all": "yarn build:dist --env.chunks=head --env.chunks=body",
+    "build:dist:head": "yarn build:dist --env.chunks=head",
+    "build:dist:body": "yarn build:dist --env.chunks=body",
+    "build:dist:body:analyze": "yarn build:dist --env.chunks=body --env.addons=bundleanalyze",
+    "build:dev:all:analyze": "yarn build:dev --env.chunks=head --env.chunks=body --env.chunks=vendor  --env.optimize=true --env.addons=bundleanalyze",
+    "build:dev:all": "yarn build:dev --env.chunks=head --env.chunks=body --env.chunks=vendor --env.optimize=true",
+    "build:dev:head:analyze": "yarn build:dev --env.chunks=head --env.addons=bundleanalyze",
+    "build:dev:head": "yarn build:dev --env.chunks=head",
+    "build:dev:body:analyze": "yarn build:dev --env.chunks=body --env.addons=bundleanalyze",
+    "build:dev:body": "yarn build:dev --env.chunks=body",
+    "build:dev:vendor": "yarn build:dev --env.chunks=vendor",
+    "build:dev:vendor:analyze": "yarn build:dev --env.chunks=vendor --env.addons=bundleanalyze",
+    "build:dist:vendor": "yarn build:dist --env.chunks=vendor",
+    "build:dist:vendor:analyze": "yarn build:dist --env.chunks=vendor --env.addons=bundleanalyze",
+    "build:dist": "yarn build --env.env=dist",
+    "build:dev": "yarn build --env.env=dev",
+    "build": "webpack",
+    "things to add": "watch and dev server task, what about adding debug.shtml as the template for html-webpack-plugin with webpack-dev-server"
   }
 }

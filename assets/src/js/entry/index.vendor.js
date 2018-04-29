@@ -1,0 +1,1 @@
+const dcf_pictureFill = require('picturefill');

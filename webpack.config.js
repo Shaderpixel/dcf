@@ -1,95 +1,45 @@
-// webpack.config.js
-const path = require('path');
-const webpack = require('webpack');
+const commonConfig = require('./build-utils/webpack.common');
+const webpackMerge = require('webpack-merge');
 
-var styleLintPlugin = require('stylelint-webpack-plugin');
-var extractTextPlugin = require('extract-text-webpack-plugin');
-
-var core_js_config = {
-  entry: {
-    head: ['babel-polyfill', './core/js/loaders/core_head_js_loader.js'],
-    body: './core/js/loaders/core_body_js_loader.js'
-  },
-  output: {
-    path: path.resolve(__dirname, './core/js'),
-    filename: 'core-[name].js'
-  },
-  watch: true,
-  watchOptions: {
-    aggregateTimeout : 300,
-    poll             : 1000
-  }
+const flattenArray = (arr) => {
+		return []
+				.concat.apply([], [arr])	// Normalize array of addons (flattens the array)
+				.filter(Boolean); 							// If addons is undefined or falsy, filter it out of the array
 }
 
-// config for compiling head and body JS
-var theme_js_config = function(env) {
-  var theme = 'example';
-  if (env && env.theme) {
-    theme = env.theme;
-  }
+const addons = (addonsArg) => {         // addonsArg could be a string or array
+		let addons = flattenArray(addonsArg);
 
-  return {
-    entry: {
-      head: './theme/' + theme + '/js/loaders/theme_head_js_loader.js',
-      body: './theme/' + theme + '/js/loaders/theme_body_js_loader.js'
-    },
-    output: {
-      path: path.resolve(__dirname, './theme/' + theme + '/js'),
-      filename: theme + '-[name].js'
-    },
-    watch        : true,
-    watchOptions : {
-      aggregateTimeout : 300,
-      poll             : 1000
-    },
-    module       : {
-      rules : [
-        {
-          test : /\.scss$/,
-          use  : extractTextPlugin.extract({
-            fallback : 'style-loader',
-            use      : ['css-loader', 'postcss-loader', {
-              'loader': 'sass-loader',
-              options: {
-                includePaths: [__dirname+'/node_modules/modularscale-sass/stylesheets']
-              }
-            }]
-          })
-        },
-        {
-          test: /\.js$/,
-          exclude: /node_modules/,
-          loader: 'babel-loader'
-        },
-        /*
-        {
-          test: /\.scss$/,
-          use: [
-            'style-loader',
-            {
-              loader: 'css-loader',
-              options: { importLoaders: 2 }
-            },
-            'postcss-loader',
-            'sass-loader'
-          ]
-        },
-        */
-      ]
-    },
-    plugins      : [
-      new styleLintPlugin({
-        options: {
-          syntax: 'scss'
-        }
-      }),
-      new extractTextPlugin({
-        filename  : '../css/all.css',
-        disable   : false,
-        allChunks : true
-      })
-    ]
-  }
+		return addons.map((addonName) => {
+						try {
+								return require(`./build-utils/addons/webpack.${addonName}.js`)
+						}
+						catch(error) {
+								console.error(`--------------------------------------------------\nCannot locate addon -> [${addonName}] in build-utils\n--------------------------------------------------`);
+								throw error;
+						}
+				}
+		); // map array of addonNames to an array of addon path
 };
 
-module.exports = [core_js_config, theme_js_config];
+const bundles = (chunksArg, envFlag) => {
+		let chunks = flattenArray(chunksArg);
+
+		return chunks.map((chunk) => require(`./build-utils/webpack.${envFlag}.${chunk}.js`));
+}
+
+
+module.exports = (env) => {
+		console.log(env);
+
+		// check whether the needed env flag values are present before we require the modules that uses those flags
+		const envConfig = env == null ? '' : env.env && env.chunks ? bundles(env.chunks, env.env): [];
+		const envAddons = env == null ? '' : env.addons ? addons(env.addons): [];
+		const optimize = env == null ? '' : env.env && env.optimize ? require(`./build-utils/webpack.${env.env}.optimize`): [];
+
+
+		const mergedConfig = webpackMerge(commonConfig, ...envConfig, ...envAddons, optimize); // spread env.addons array or single value into addons
+
+		console.log(mergedConfig);
+		return mergedConfig;
+}
