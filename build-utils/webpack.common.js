@@ -5,6 +5,6 @@ const config = {
 		plugins: [
 				new Webpack.ProgressPlugin()
 		]
-}
+};
 
 module.exports = config;
