@@ -1,9 +1,9 @@
-const webpack = require('webpack');
+const Webpack = require('webpack');
 
 const config = {
 		devtool: 'source-map',
 		plugins: [
-				new webpack.ProgressPlugin()
+				new Webpack.ProgressPlugin()
 		]
 }
 
