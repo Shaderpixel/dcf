@@ -11,7 +11,7 @@ const $ = require('./gulp-load-plugins');
  * @param {string} newerDest: target file for newer to compared against
  */
 
-function uglifyNewer (src, dest, taskName, newerDest) {
+function uglifyNewer (src, dest, taskName, newerDest, noBanner = false) {
 		$.fancyLog(`----> //** Uglifying JS Files -- ${taskName}`);
 		return $.pump([
 			gulp.src(src, {allowEmpty: true}),
@@ -32,7 +32,9 @@ function uglifyNewer (src, dest, taskName, newerDest) {
 				showFiles: true,
 				gzip: true,
 			}),
-			$.header(banner, { pkg: pkg }),
+			$.if(!noBanner,
+				$.header(banner, { pkg: pkg })
+			),
 			$.sourcemaps.write('./'),
 			gulp.dest(dest)
 		]);

@@ -17,7 +17,9 @@ const dialogPolyfill = require.resolve('dialog-polyfill');
 const intersectionObserver = require.resolve('intersection-observer');
 const picturefill = require.resolve('picturefill');
 const objectFitImages = require.resolve('object-fit-images');
+//TODO detailsPolyfill being pulled in as index.js
 const detailsPolyfill = require.resolve('details-polyfill');
+const es6Promise = require.resolve('es6-promise');
 
 module.exports = {
 	vendorJsSrc: vendorJsSrcPath,
@@ -25,8 +27,8 @@ module.exports = {
 	vendorJsGlob: [`${vendorJsSrcPath}/**/*.js`],
 	vendorJsDest: path.join(commonPaths.outputBuild, 'js', 'vendor'),
 	// better to use unminified mustard files since all files will be minified
-	mustardJsGlob: [`${mustardJsSrcPath}/**/*.js`, picturefill, objectFitImages, detailsPolyfill, dialogPolyfill, intersectionObserver],
-	mustardJsDest: path.join(commonPaths.outputBuild, 'js', 'mustard'),
+	mustardJSGlob: [`${mustardJsSrcPath}/**/*.js`,picturefill, objectFitImages, detailsPolyfill, dialogPolyfill, intersectionObserver, es6Promise],
+	mustardDest: path.join(commonPaths.outputBuild, 'js', 'mustard'),
 	appJsPath: appJsSrcPath,
 	appJsCommonSrc: path.join(appJsSrcPath, 'common'),
 	appJsOptionalSrc: path.join(appJsSrcPath, 'optional'),

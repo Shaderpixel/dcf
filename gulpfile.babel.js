@@ -265,17 +265,17 @@ gulp.task('vendorDist-watch', () => {
 // not using mustardConcat atm due to feature detection, bring in specific mustard files
 gulp.task('mustardConcat:newer', () => {
 	// need to return the stream
-	return concat.newer(buildPaths.mustardJsGlob, buildPaths.mustardJsDest, buildNames.mustardJs, 'mustardConcat:newer',  path.join(buildPaths.mustardJsDest, buildNames.mustardJs));
+	return concat.newer(buildPaths.mustardGlob, buildPaths.mustardDest, buildNames.mustardJs, 'mustardConcat:newer',  path.join(buildPaths.mustardDest, buildNames.mustardJs));
 });
 
 
 gulp.task('copyMustard:newer', () => {
-	return copyNewer(buildPaths.mustardJsGlob, buildPaths.mustardJsDest, 'copyMustard:newer', buildPaths.mustardJsDest);
+	return copyNewer(buildPaths.mustardJSGlob, buildPaths.mustardDest, 'copyMustard:newer', buildPaths.mustardDest);
 });
 
 
 gulp.task('mustardUglify', () => {
-	return uglifyNewer(distPaths.mustardJsSrc, distPaths.mustardJsDest, 'mustardUglify', distPaths.mustardJsDest);
+	return uglifyNewer(distPaths.mustardJsSrc, distPaths.mustardDest, 'mustardUglify', distPaths.mustardDest, true);
 });
 
 
@@ -283,11 +283,11 @@ gulp.task('mustardDist', gulp.series( 'copyMustard:newer', 'mustardUglify' ));
 
 
 gulp.task('mustardDist-watch', () => {
-	gulp.watch(buildPaths.mustardJsGlob, gulp.series('mustardDist'))
+	gulp.watch(buildPaths.mustardJSGlob, gulp.series('mustardDist'))
 			.on('unlink', (ePath, stats) => {
 // code to execute on delete
 				console.log(`${ePath} deleted, recompiling ${buildNames.mustardMinJs} - [mustardDist-watch]`);
-				concat.base(buildPaths.mustardJsGlob, buildPaths.mustardJsDest, buildNames.mustardJs, 'mustardConcat'); // if src files get deleted, force rebuild of dist file
+				concat.base(buildPaths.mustardGlob, buildPaths.mustardDest, buildNames.mustardJs, 'mustardConcat'); // if src files get deleted, force rebuild of dist file
 			});
 });
 
