@@ -12,3 +12,19 @@ const customPlumber = require('./custom-plumber');
  * so if you are returning something, make sure that you either specify an exports option or rename the file to
  * match. See https://github.com/eduardolundgren/gulp-umd#options
  */
+
+const mustardCutter = [
+	gulp.src(path.join(buildPaths.appJsOptionalSrc, 'dcf-mustard-cutter.js')),
+	customPlumber('error wrapping mustardCutter'),
+	$.newer({ dest:buildPaths.umdOptionaAppDest }),
+	$.umd({
+		exports: () => 'MustardCutter', // the variable name that will be returned
+		namespace: () => 'dcfMustardCutter' // how this module is named in the global scope
+		// if no exports defined, capitalized filename will be used instead
+	}),
+	gulp.dest(buildPaths.umdOptionaAppDest)
+];
+
+module.exports = {
+	mustardCutter,
+};

@@ -14,7 +14,7 @@ const $ = require('./gulp-load-plugins');
 function uglifyNewer (src, dest, taskName, newerDest) {
 		$.fancyLog(`----> //** Uglifying JS Files -- ${taskName}`);
 		return $.pump([
-			gulp.src(src),
+			gulp.src(src, {allowEmpty: true}),
 			customPlumber(`Error Running ${taskName} task`),
 			$.sourcemaps.init({loadMaps:true}),
 			$.newer({dest: newerDest}),

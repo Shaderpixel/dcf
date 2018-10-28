@@ -22,10 +22,10 @@ const detailsPolyfill = require.resolve('details-polyfill');
 module.exports = {
 	vendorJsSrc: vendorJsSrcPath,
 	// better to use unminified vendor files since all files will be concatenated & minified
-	vendorJsGlob: [`${vendorJsSrcPath}/**/*.js`, dialogPolyfill, intersectionObserver],
+	vendorJsGlob: [`${vendorJsSrcPath}/**/*.js`],
 	vendorJsDest: path.join(commonPaths.outputBuild, 'js', 'vendor'),
-	// better to use unminified vendor files since all files will be concatenated & minified
-	mustardJsGlob: [`${mustardJsSrcPath}/**/*.js`, picturefill, objectFitImages, detailsPolyfill],
+	// better to use unminified mustard files since all files will be minified
+	mustardJsGlob: [`${mustardJsSrcPath}/**/*.js`, picturefill, objectFitImages, detailsPolyfill, dialogPolyfill, intersectionObserver],
 	mustardJsDest: path.join(commonPaths.outputBuild, 'js', 'mustard'),
 	appJsPath: appJsSrcPath,
 	appJsCommonSrc: path.join(appJsSrcPath, 'common'),
