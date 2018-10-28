@@ -273,13 +273,18 @@ gulp.task('copyMustard:newer', () => {
 	return copyNewer(buildPaths.mustardJSGlob, buildPaths.mustardDest, 'copyMustard:newer', buildPaths.mustardDest);
 });
 
+// copy unminified mustard files to dist folder
+gulp.task('copyMustardDist:newer', () => {
+	return copyNewer(buildPaths.mustardJSGlob, distPaths.mustardDest, 'copyMustard:newer', distPaths.mustardDest);
+});
 
+// use only unminified mustard files
 gulp.task('mustardUglify', () => {
 	return uglifyNewer(distPaths.mustardJsSrc, distPaths.mustardDest, 'mustardUglify', distPaths.mustardDest, true);
 });
 
 
-gulp.task('mustardDist', gulp.series( 'copyMustard:newer', 'mustardUglify' ));
+gulp.task('mustardDist', gulp.series( 'copyMustard:newer', 'mustardUglify', 'copyMustardDist:newer'));
 
 
 gulp.task('mustardDist-watch', () => {
