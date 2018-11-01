@@ -57,16 +57,14 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 	}
 
 	var MustardCutter = function MustardCutter() {
+		var jsPolyfills = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : [];
+		var cssPolyfills = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : [];
+		var entries = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : [];
+
 		var mustardLoaderJS = [];
 		var mustardLoaderCSS = [];
 		console.log(_arguments);
-		var _arguments$jsPolyfill = _arguments.jsPolyfills,
-		    jsPolyfills = _arguments$jsPolyfill === undefined ? [] : _arguments$jsPolyfill,
-		    _arguments$cssPolyfil = _arguments.cssPolyfills,
-		    cssPolyfills = _arguments$cssPolyfil === undefined ? [] : _arguments$cssPolyfil,
-		    _arguments$entries = _arguments.entries,
-		    entries = _arguments$entries === undefined ? [] : _arguments$entries;
-
+		// let { jsPolyfills = [], cssPolyfills =[], entries =[] } = arguments;
 
 		if (!('Promise' in window)) {
 			var promisePolyfill = document.createElement("script");
