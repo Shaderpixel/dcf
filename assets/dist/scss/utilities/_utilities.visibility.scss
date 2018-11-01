@@ -1,0 +1,15 @@
+/////////////////////////////////
+// !CORE / UTILITIES / VISIBILITY
+/////////////////////////////////
+
+
+// !Invisible
+.dcf-invisible { @include invisible(!important); }
+
+
+// !Visible
+.dcf-visible { @include visible(!important); }
+
+
+// !Screen Reader Only
+.dcf-sr-only:not(:focus):not(:active) { @include sr-only(!important); }

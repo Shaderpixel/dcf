@@ -1,0 +1,20 @@
+//////////////////////////////
+// !CORE / COMPONENTS / HEADER
+//////////////////////////////
+
+
+.dcf-header a {
+  text-decoration: none;
+}
+
+.dcf-header button {
+  color: $color-link;
+}
+
+.dcf-header button:hover {
+  color: $color-link-hover;
+}
+
+.dcf-header button:active {
+  color: $color-link-active;
+}

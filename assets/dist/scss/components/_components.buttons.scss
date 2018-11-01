@@ -1,0 +1,16 @@
+///////////////////////////////
+// !CORE / COMPONENTS / BUTTONS
+///////////////////////////////
+
+
+.dcf-btn {
+  appearance: none;
+  cursor: pointer;
+  display: inline-block;
+  text-align: center;
+}
+
+a.dcf-btn-primary,
+a.dcf-btn-secondary {
+  text-decoration: none;
+}

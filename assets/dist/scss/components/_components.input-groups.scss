@@ -1,0 +1,47 @@
+////////////////////////////////////
+// !CORE / COMPONENTS / INPUT GROUPS
+////////////////////////////////////
+
+
+// Form that contains input group
+.dcf-input-group-form {
+  align-items: baseline; // Align to baseline in case there is a difference in size between the label and its corresponding input
+  display: flex;
+  flex-wrap: wrap; // Allow input to wrap at narrower viewport widths
+}
+
+
+// Input group = input field + button or add-on
+.dcf-input-group {
+  display: flex;
+  flex: 1 1 50%; // Grow/shrink as needed, 50% flex-basis
+}
+
+
+//  Child input field of input group
+.dcf-input-group .dcf-input-text {
+  flex: 1 1 auto; // Grow/shrink as needed, with auto width
+}
+
+
+// Input group and child input field
+.dcf-input-group,
+.dcf-input-group .dcf-input-text {
+  min-width: 0;
+}
+
+
+// Input group button
+.dcf-input-group .dcf-btn {
+  align-items: center;
+  display: flex;
+}
+
+
+// Input group add-on
+.dcf-input-group-addon {
+  align-items: center;
+  display: flex;
+  text-align: center;
+  white-space: nowrap;
+}
