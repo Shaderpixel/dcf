@@ -11,8 +11,6 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 		root.dcfMustardCutter = factory();
 	}
 })(undefined, function () {
-	var _arguments = arguments;
-
 	function load() {
 		function loadTag(tag) {
 			return function (url) {
@@ -56,15 +54,17 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 		};
 	}
 
-	var MustardCutter = function MustardCutter() {
-		var jsPolyfills = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : [];
-		var cssPolyfills = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : [];
-		var entries = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : [];
-
+	function MustardCutter() {
 		var mustardLoaderJS = [];
 		var mustardLoaderCSS = [];
-		console.log(_arguments);
-		// let { jsPolyfills = [], cssPolyfills =[], entries =[] } = arguments;
+		console.log(arguments);
+		var _arguments$jsPolyfill = arguments.jsPolyfills,
+		    jsPolyfills = _arguments$jsPolyfill === undefined ? [] : _arguments$jsPolyfill,
+		    _arguments$cssPolyfil = arguments.cssPolyfills,
+		    cssPolyfills = _arguments$cssPolyfil === undefined ? [] : _arguments$cssPolyfil,
+		    _arguments$entries = arguments.entries,
+		    entries = _arguments$entries === undefined ? [] : _arguments$entries;
+
 
 		if (!('Promise' in window)) {
 			var promisePolyfill = document.createElement("script");
