@@ -378,13 +378,14 @@ gulp.task('babel', (done) => {
 	$.fancyLog('----> //** Transpiling ES6 via Babel... 🍕');
 	$.pump([
 		gulp.src(buildPaths.babelAppGlob),
+		$.debug('coming out'),
 		customPlumber('Error Running Babel'),
 		$.cached('babel'),
 		$.babel({presets: [ 'env' ]}),
 		gulp.dest(buildPaths.appJsDestPostBabel)
 	], done);
 });
-
+console.log(buildPaths.babelAppGlob);
 
 
 /* ----------------- */
