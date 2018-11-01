@@ -41,9 +41,11 @@ function load() {
 	}
 }
 
-let MustardCutter = (jsPolyfills = [], cssPolyfills = [], entries = []) => {
+let MustardCutter = () => {
 	let mustardLoaderJS = [];
 	let mustardLoaderCSS = [];
+	console.log(arguments);
+	{ jsPolyfills = [], cssPolyfills = [], entries = []} = {...arguments}
 
 	if (!('Promise' in window)) {
 			const promisePolyfill = document.createElement("script");
