@@ -59,6 +59,7 @@ function MustardCutter () {
 
 	jsPolyfills.forEach(jsPolyfill => {
 		if (!(jsPolyfill.testCondition)) {
+			console.log(jsPolyfill.testCondition);
 			mustardLoadersJS.push(jsPolyfill.path);
 		}
 	});
@@ -69,8 +70,8 @@ function MustardCutter () {
 		}
 	});
 
-	console.log(`jsPolyfills: ${mustardLoadersJS}`);
-	console.log(`cssPolyfills: ${mustardLoadersCSS}`);
+	console.log(`mustardLoadersJS: ${mustardLoadersJS}`);
+	console.log(`mustardLoadersCSS: ${mustardLoadersCSS}`);
 
 	Promise.all(
 			mustardLoadersJS.map(mustardLoader => load.js(mustardLoader))

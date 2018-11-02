@@ -71,6 +71,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 
 		jsPolyfills.forEach(function (jsPolyfill) {
 			if (!jsPolyfill.testCondition) {
+				console.log(jsPolyfill.testCondition);
 				mustardLoadersJS.push(jsPolyfill.path);
 			}
 		});
@@ -81,8 +82,8 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 			}
 		});
 
-		console.log('jsPolyfills: ' + mustardLoadersJS);
-		console.log('cssPolyfills: ' + mustardLoadersCSS);
+		console.log('mustardLoadersJS: ' + mustardLoadersJS);
+		console.log('mustardLoadersCSS: ' + mustardLoadersCSS);
 
 		Promise.all(mustardLoadersJS.map(function (mustardLoader) {
 			return load.js(mustardLoader);
