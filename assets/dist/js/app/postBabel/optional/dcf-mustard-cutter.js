@@ -12,7 +12,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 	}
 })(undefined, function () {
 	// https://davidwalsh.name/javascript-loader
-	function load() {
+	var load = function () {
 		function loadTag(tag) {
 			return function (url) {
 				// This promise will be used by Promise.all to determine success or failure
@@ -53,7 +53,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 			js: loadTag('script'),
 			img: loadTag('img')
 		};
-	}
+	}();
 
 	function MustardCutter() {
 		var mustardLoadersJS = [];
@@ -84,7 +84,10 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 
 		console.log('mustardLoadersJS: ' + mustardLoadersJS);
 		console.log('mustardLoadersCSS: ' + mustardLoadersCSS);
-
+		mustardLoadersJS.map(function (mustardLoader) {
+			return load.js().bind(null, mustardLoader);
+		});
+		console.log(mustardLoadersJS);
 		Promise.all(mustardLoadersJS.map(function (mustardLoader) {
 			return load.js().bind(null, mustardLoader);
 		})).then(function () {

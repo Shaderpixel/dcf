@@ -1,5 +1,5 @@
 // https://davidwalsh.name/javascript-loader
-function load() {
+const load = (() => {
 	function loadTag(tag) {
 		return function(url) {
 			// This promise will be used by Promise.all to determine success or failure
@@ -40,7 +40,7 @@ function load() {
 		js: loadTag('script'),
 		img: loadTag('img')
 	}
-}
+})();
 
 function MustardCutter () {
 	let mustardLoadersJS = [];
@@ -63,7 +63,8 @@ function MustardCutter () {
 
 	console.log(`mustardLoadersJS: ${mustardLoadersJS}`);
 	console.log(`mustardLoadersCSS: ${mustardLoadersCSS}`);
-
+	mustardLoadersJS.map(mustardLoader => load.js().bind(null, mustardLoader))
+	console.log(mustardLoadersJS);
 	Promise.all(
 			mustardLoadersJS.map(mustardLoader => load.js().bind(null, mustardLoader))
 	)
