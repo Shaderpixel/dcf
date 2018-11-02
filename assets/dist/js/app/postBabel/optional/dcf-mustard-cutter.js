@@ -32,7 +32,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 					// Need to set different attributes depending on tag type
 					switch (tag) {
 						case 'script':
-							element.async = true;
+							element.async = false;
 							break;
 						case 'link':
 							element.type = 'text/css';
