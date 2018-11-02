@@ -14,7 +14,7 @@ const load = (() => {
 			// This promise will be used by Promise.all to determine success or failure
 			return new Promise(function(resolve, reject) {
 				var element = document.createElement(tag);
-				var parent = 'body';
+				var parent = 'head';
 				var attr = 'src';
 
 				// Important success and error for the promise
