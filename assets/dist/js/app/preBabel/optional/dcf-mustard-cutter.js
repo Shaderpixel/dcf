@@ -56,13 +56,6 @@ function MustardCutter () {
 	console.log(arguments);
 	let [ jsPolyfills = [], cssPolyfills =[], entries =[], ...rest ] = arguments;
 
-	if (!('Promise' in window)) {
-			const promisePolyfill = document.createElement("script");
-			promisePolyfill.src = '/wdn/templates_5.0/js/compressed/mustard/es6-promise.js';
-			promisePolyfill.async = false; // Keep the execution order
-			document.head.appendChild(promisePolyfill);
-	}
-
 	jsPolyfills.forEach(jsPolyfill => {
 		if (!(jsPolyfill.testCondition)) {
 			mustardLoaderJS.push(jsPolyfill.path);
