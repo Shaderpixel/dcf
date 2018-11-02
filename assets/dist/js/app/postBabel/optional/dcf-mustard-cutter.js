@@ -86,7 +86,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 		console.log('mustardLoadersCSS: ' + mustardLoadersCSS);
 
 		Promise.all(mustardLoadersJS.map(function (mustardLoader) {
-			return load.js(mustardLoader);
+			return load.js().bind(null, mustardLoader);
 		})).then(function () {
 			console.log('Everything has loaded!');
 			console.log('mustardLoadersJS: ' + mustardLoadersJS);

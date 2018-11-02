@@ -65,7 +65,7 @@ function MustardCutter () {
 	console.log(`mustardLoadersCSS: ${mustardLoadersCSS}`);
 
 	Promise.all(
-			mustardLoadersJS.map(mustardLoader => load.js(mustardLoader))
+			mustardLoadersJS.map(mustardLoader => load.js().bind(null, mustardLoader))
 	)
 		.then(
 			function() {
