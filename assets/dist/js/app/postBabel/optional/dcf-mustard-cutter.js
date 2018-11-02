@@ -58,13 +58,15 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 		var mustardLoaderJS = [];
 		var mustardLoaderCSS = [];
 		console.log(arguments);
-		var _arguments$jsPolyfill = arguments.jsPolyfills,
-		    jsPolyfills = _arguments$jsPolyfill === undefined ? [] : _arguments$jsPolyfill,
-		    _arguments$cssPolyfil = arguments.cssPolyfills,
-		    cssPolyfills = _arguments$cssPolyfil === undefined ? [] : _arguments$cssPolyfil,
-		    _arguments$entries = arguments.entries,
-		    entries = _arguments$entries === undefined ? [] : _arguments$entries;
 
+		var _arguments = Array.prototype.slice.call(arguments),
+		    _arguments$ = _arguments[0],
+		    jsPolyfills = _arguments$ === undefined ? [] : _arguments$,
+		    _arguments$2 = _arguments[1],
+		    cssPolyfills = _arguments$2 === undefined ? [] : _arguments$2,
+		    _arguments$3 = _arguments[2],
+		    entries = _arguments$3 === undefined ? [] : _arguments$3,
+		    rest = _arguments.slice(3);
 
 		if (!('Promise' in window)) {
 			var promisePolyfill = document.createElement("script");
