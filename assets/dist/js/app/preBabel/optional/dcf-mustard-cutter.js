@@ -58,7 +58,7 @@ function MustardCutter () {
 
 	if (!('Promise' in window)) {
 			const promisePolyfill = document.createElement("script");
-			promisePolyfill.src = 'mustard/es6-promise.js';
+			promisePolyfill.src = '/wdn/templates_5.0/js/compressed/mustard/es6-promise.js';
 			promisePolyfill.async = false; // Keep the execution order
 			document.head.appendChild(promisePolyfill);
 	}

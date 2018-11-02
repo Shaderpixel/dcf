@@ -70,7 +70,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 
 		if (!('Promise' in window)) {
 			var promisePolyfill = document.createElement("script");
-			promisePolyfill.src = 'mustard/es6-promise.js';
+			promisePolyfill.src = '/wdn/templates_5.0/js/compressed/mustard/es6-promise.js';
 			promisePolyfill.async = false; // Keep the execution order
 			document.head.appendChild(promisePolyfill);
 		}
