@@ -11,6 +11,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 		root.dcfMustardCutter = factory();
 	}
 })(undefined, function () {
+	// https://davidwalsh.name/javascript-loader
 	function load() {
 		function loadTag(tag) {
 			return function (url) {
@@ -55,8 +56,8 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 	}
 
 	function MustardCutter() {
-		var mustardLoaderJS = [];
-		var mustardLoaderCSS = [];
+		var mustardLoadersJS = [];
+		var mustardLoadersCSS = [];
 		console.log(arguments);
 
 		var _arguments = Array.prototype.slice.call(arguments),
@@ -70,18 +71,27 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 
 		jsPolyfills.forEach(function (jsPolyfill) {
 			if (!jsPolyfill.testCondition) {
-				mustardLoaderJS.push(jsPolyfill.path);
+				mustardLoadersJS.push(jsPolyfill.path);
 			}
 		});
 
 		cssPolyfills.forEach(function (csssPolyfill) {
 			if (!csssPolyfill.testCondition) {
-				mustardLoaderCSS.push(csssPolyfill.path);
+				mustardLoadersCSS.push(csssPolyfill.path);
 			}
 		});
 
-		console.log('jsPolyfills: ' + jsPolyfills);
-		console.log('cssPolyfills: ' + cssPolyfills);
-	};
+		console.log('jsPolyfills: ' + mustardLoadersJS);
+		console.log('cssPolyfills: ' + mustardLoadersCSS);
+
+		Promise.all(mustardLoadersJS.map(function (mustardLoader) {
+			return load.js(mustardLoader);
+		})).then(function () {
+			console.log('Everything has loaded!');
+			console.log('mustardLoadersJS: ' + mustardLoadersJS);
+		}).catch(function () {
+			console.log('Oh no, epic failure!');
+		});
+	}
 	return MustardCutter;
 });

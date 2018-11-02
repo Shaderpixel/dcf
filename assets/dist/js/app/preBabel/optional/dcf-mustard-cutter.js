@@ -7,6 +7,7 @@
     root.dcfMustardCutter = factory();
   }
 }(this, function() {
+// https://davidwalsh.name/javascript-loader
 function load() {
 	function loadTag(tag) {
 		return function(url) {
@@ -51,25 +52,38 @@ function load() {
 }
 
 function MustardCutter () {
-	let mustardLoaderJS = [];
-	let mustardLoaderCSS = [];
+	let mustardLoadersJS = [];
+	let mustardLoadersCSS = [];
 	console.log(arguments);
 	let [ jsPolyfills = [], cssPolyfills =[], entries =[], ...rest ] = arguments;
 
 	jsPolyfills.forEach(jsPolyfill => {
 		if (!(jsPolyfill.testCondition)) {
-			mustardLoaderJS.push(jsPolyfill.path);
+			mustardLoadersJS.push(jsPolyfill.path);
 		}
 	});
 
 	cssPolyfills.forEach(csssPolyfill => {
 		if (!(csssPolyfill.testCondition)) {
-			mustardLoaderCSS.push(csssPolyfill.path);
+			mustardLoadersCSS.push(csssPolyfill.path);
 		}
 	});
 
-	console.log(`jsPolyfills: ${jsPolyfills}`);
-	console.log(`cssPolyfills: ${cssPolyfills}`);
-};
+	console.log(`jsPolyfills: ${mustardLoadersJS}`);
+	console.log(`cssPolyfills: ${mustardLoadersCSS}`);
+
+	Promise.all(
+			mustardLoadersJS.map(mustardLoader => load.js(mustardLoader))
+	)
+		.then(
+			function() {
+				console.log('Everything has loaded!');
+				console.log(`mustardLoadersJS: ${mustardLoadersJS}`);
+	})
+		.catch(
+				function() {
+					console.log('Oh no, epic failure!');
+	});
+}
 return MustardCutter;
 }));
