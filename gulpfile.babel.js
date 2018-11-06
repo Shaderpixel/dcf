@@ -275,7 +275,7 @@ gulp.task('copyMustard:newer', () => {
 
 // copy unminified mustard files to dist folder
 gulp.task('copyMustardDist:newer', () => {
-	return copyNewer(buildPaths.mustardJSGlob, distPaths.mustardDest, 'copyMustard:newer', distPaths.mustardDest);
+	return copyNewer(buildPaths.mustardDest, distPaths.mustardDest, 'copyMustard:newer', distPaths.mustardDest);
 });
 
 // use only unminified mustard files
@@ -292,11 +292,13 @@ gulp.task('renameDetailsIndex', (done) => {
 		gulp.dest(buildPaths.mustardDest),
 	], done);
 });
+
 // gulp-rename does not remove existing files
 gulp.task('deleteDetailsIndex', ()=>{
  return	$.delete(path.join(buildPaths.mustardDest, 'index.js'));
 });
-gulp.task('renameDetailsPolyfill', gulp.series('renameDetailsIndex', 'deleteDetailsIndex'))
+
+gulp.task('renameDetailsPolyfill', gulp.series('renameDetailsIndex', 'deleteDetailsIndex'));
 
 
 gulp.task('mustardDist', gulp.series( 'copyMustard:newer', 'renameDetailsPolyfill', 'mustardUglify', 'copyMustardDist:newer'));
