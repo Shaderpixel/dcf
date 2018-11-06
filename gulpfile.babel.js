@@ -284,7 +284,22 @@ gulp.task('mustardUglify', () => {
 });
 
 
-gulp.task('mustardDist', gulp.series( 'copyMustard:newer', 'mustardUglify', 'copyMustardDist:newer'));
+// custom tasks to rename details-polyfill file, might become an issue if more than single index.js file exists
+gulp.task('renameDetailsIndex', (done) => {
+	$.pump([
+		gulp.src(path.join(buildPaths.mustardDest, 'index.js'), {allowEmpty:true}),
+		$.rename('details-polyfill.js'),
+		gulp.dest(buildPaths.mustardDest),
+	], done);
+});
+// gulp-rename does not remove existing files
+gulp.task('deleteDetailsIndex', ()=>{
+ return	$.delete(path.join(buildPaths.mustardDest, 'index.js'));
+});
+gulp.task('renameDetailsPolyfill', gulp.series('renameDetailsIndex', 'deleteDetailsIndex'))
+
+
+gulp.task('mustardDist', gulp.series( 'copyMustard:newer', 'renameDetailsPolyfill', 'mustardUglify', 'copyMustardDist:newer'));
 
 
 gulp.task('mustardDist-watch', () => {
@@ -384,7 +399,6 @@ gulp.task('babel', (done) => {
 		gulp.dest(buildPaths.appJsDestPostBabel)
 	], done);
 });
-console.log(buildPaths.babelAppGlob);
 
 
 /* ----------------- */

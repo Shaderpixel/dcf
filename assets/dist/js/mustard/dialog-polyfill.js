@@ -735,6 +735,4 @@
     // all others
     window['dialogPolyfill'] = dialogPolyfill;
   }
-
-  console.log(dialogPolyfill);
 })();

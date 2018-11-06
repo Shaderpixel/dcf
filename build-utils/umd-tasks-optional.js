@@ -13,18 +13,31 @@ const customPlumber = require('./custom-plumber');
  * match. See https://github.com/eduardolundgren/gulp-umd#options
  */
 
-const mustardCutter = [
-	gulp.src(path.join(buildPaths.appJsOptionalSrc, 'dcf-mustard-cutter.js')),
-	customPlumber('error wrapping mustardCutter'),
+const jsMustardCutter = [
+	gulp.src(path.join(buildPaths.appJsOptionalSrc, 'dcf-js-mustard-cutter.js')),
+	customPlumber('error wrapping js-mustardCutter'),
 	$.newer({ dest:buildPaths.umdOptionaAppDest }),
 	$.umd({
-		exports: () => 'MustardCutter', // the variable name that will be returned
-		namespace: () => 'dcfMustardCutter' // how this module is named in the global scope
+		exports: () => 'JsMustardCutter', // the variable name that will be returned
+		namespace: () => 'dcfJsMustardCutter' // how this module is named in the global scope
+		// if no exports defined, capitalized filename will be used instead
+	}),
+	gulp.dest(buildPaths.umdOptionaAppDest)
+];
+
+const cssMustardCutter = [
+	gulp.src(path.join(buildPaths.appJsOptionalSrc, 'dcf-css-mustard-cutter.js')),
+	customPlumber('error wrapping css-mustardCutter'),
+	$.newer({ dest:buildPaths.umdOptionaAppDest }),
+	$.umd({
+		exports: () => 'CssMustardCutter', // the variable name that will be returned
+		namespace: () => 'dcfCssMustardCutter' // how this module is named in the global scope
 		// if no exports defined, capitalized filename will be used instead
 	}),
 	gulp.dest(buildPaths.umdOptionaAppDest)
 ];
 
 module.exports = {
-	mustardCutter,
+	jsMustardCutter,
+	cssMustardCutter,
 };

@@ -1,12 +1,3 @@
-;(function(root, factory) {
-  if (typeof define === 'function' && define.amd) {
-    define([], factory);
-  } else if (typeof exports === 'object') {
-    module.exports = factory();
-  } else {
-    root.dcfMustardCutter = factory();
-  }
-}(this, function() {
 // https://davidwalsh.name/javascript-loader
 const load = (() => {
 	function loadTag(tag) {
@@ -27,7 +18,10 @@ const load = (() => {
 
 				// Need to set different attributes depending on tag type
 				switch(tag) {
-					case 'script':
+					case 'script:async':
+						element.async = true;
+						break;
+					case 'script:sync':
 						element.async = false;
 						break;
 					case 'link':
@@ -46,23 +40,21 @@ const load = (() => {
 
 	return {
 		css: loadTag('link'),
-		js: loadTag('script'),
+		jsAsync: loadTag('script:async'),
+		jsSync: loadTag('script:sync'),
 		img: loadTag('img')
 	}
 })();
 
-function MustardCutter () {
-	let mustardLoadersJS = [];
-	let mustardLoadersCSS = [];
-	console.log(arguments);
-	let [ jsPolyfills = [], cssPolyfills =[], entries =[], ...rest ] = arguments;
-
-	jsPolyfills.forEach(jsPolyfill => {
-		if (!(jsPolyfill.testCondition)) {
-			console.log(jsPolyfill.testCondition);
-			mustardLoadersJS.push(jsPolyfill.path);
-		}
-	});
+/**
+ * MustardCutter
+ * @params
+ * @cssPolyfills: an array of objects, each object contains testCondition and path to the css file
+ * @entries: an array of paths to files that needs to be run in sequence
+ * */
+function CssMustardCutter () {
+	let mustardLoadersCSS = [],
+  [ cssPolyfills =[], ...rest ] = arguments;
 
 	cssPolyfills.forEach(csssPolyfill => {
 		if (!(csssPolyfill.testCondition)) {
@@ -70,21 +62,10 @@ function MustardCutter () {
 		}
 	});
 
-	console.log(`mustardLoadersJS: ${mustardLoadersJS}`);
-	console.log(`mustardLoadersCSS: ${mustardLoadersCSS}`);
-
-	Promise.all(
-			mustardLoadersJS.map(mustardLoader => load.js(mustardLoader))
-	)
-		.then(
-			function() {
-				console.log('Everything has loaded!');
-				console.log(`mustardLoadersJS: ${mustardLoadersJS}`);
-	})
+	mustardLoadersCSS.map(mustardLoader => load.js(mustardLoader))
 		.catch(
-				function() {
-					console.log('Oh no, epic failure!');
-	});
+			(err) => {
+				console.error('Failed at ' + err);
+			}
+	);
 }
-return MustardCutter;
-}));
