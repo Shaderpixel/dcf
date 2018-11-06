@@ -275,7 +275,7 @@ gulp.task('copyMustard:newer', () => {
 
 // copy unminified mustard files to dist folder
 gulp.task('copyMustardDist:newer', () => {
-	return copyNewer(buildPaths.mustardDest, distPaths.mustardDest, 'copyMustard:newer', distPaths.mustardDest);
+	return copyNewer(distPaths.mustardJsSrc, distPaths.mustardDest, 'copyMustard:newer', distPaths.mustardDest);
 });
 
 // use only unminified mustard files
@@ -292,7 +292,7 @@ gulp.task('renameDetailsIndex', (done) => {
 		gulp.dest(buildPaths.mustardDest),
 	], done);
 });
-
+7
 // gulp-rename does not remove existing files
 gulp.task('deleteDetailsIndex', ()=>{
  return	$.delete(path.join(buildPaths.mustardDest, 'index.js'));
