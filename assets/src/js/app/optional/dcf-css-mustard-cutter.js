@@ -1,3 +1,6 @@
+/** THIS IS STILL A WIP: LOAD function can possibly be separated out into its own module and be a
+ *  dependent for mustard cutters or other modules that has use for script injectors
+ *  **/
 // https://davidwalsh.name/javascript-loader
 const load = (() => {
 	function loadTag(tag) {
@@ -62,7 +65,7 @@ function CssMustardCutter () {
 		}
 	});
 
-	mustardLoadersCSS.map(mustardLoader => load.js(mustardLoader))
+	mustardLoadersCSS.map(mustardLoader => load.css(mustardLoader))
 		.catch(
 			(err) => {
 				console.error('Failed at ' + err);

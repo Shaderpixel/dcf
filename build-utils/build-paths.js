@@ -1,7 +1,6 @@
 const path = require('path');
 const commonPaths = require('./common-paths');
 const buildNames = require('./build-names');
-const fs = require('fs');
 
 const vendorJsSrcPath = path.join(commonPaths.srcPath, 'js', 'vendor');
 const mustardJsSrcPath = path.join(commonPaths.srcPath, 'js', 'mustard');

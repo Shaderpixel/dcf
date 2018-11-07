@@ -14,7 +14,7 @@ const customPlumber = require('./custom-plumber');
  */
 
 const jsMustardCutter = [
-	gulp.src(path.join(buildPaths.appJsOptionalSrc, 'dcf-js-mustard-cutter.js')),
+	gulp.src(path.join(buildPaths.appJsOptionalSrc, 'dcf-mustard-cutter.js')),
 	customPlumber('error wrapping js-mustardCutter'),
 	$.newer({ dest:buildPaths.umdOptionaAppDest }),
 	$.umd({
