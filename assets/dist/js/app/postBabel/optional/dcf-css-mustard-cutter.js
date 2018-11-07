@@ -11,6 +11,9 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 		root.dcfCssMustardCutter = factory();
 	}
 })(undefined, function () {
+	/** THIS IS STILL A WIP: LOAD function can possibly be separated out into its own module and be a
+  *  dependent for mustard cutters or other modules that has use for script injectors
+  *  **/
 	// https://davidwalsh.name/javascript-loader
 	var load = function () {
 		function loadTag(tag) {
@@ -80,7 +83,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 		});
 
 		mustardLoadersCSS.map(function (mustardLoader) {
-			return load.js(mustardLoader);
+			return load.css(mustardLoader);
 		}).catch(function (err) {
 			console.error('Failed at ' + err);
 		});
